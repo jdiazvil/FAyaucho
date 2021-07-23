@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "210174661728",
+    "project_id": "tinder-ayacucho",
+    "storage_bucket": "tinder-ayacucho.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:210174661728:android:0ff772faec8be1151a5f05",
+        "android_client_info": {
+          "package_name": "com.example.tinder_ayacucho"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "210174661728-anvak4kl64jcrthi8o6aa1dv5qvec8al.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMWze72G2jcIClEf517toB7wbkE0IGAKo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "210174661728-anvak4kl64jcrthi8o6aa1dv5qvec8al.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
