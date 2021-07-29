@@ -3,6 +3,7 @@ import 'package:tinder_ayacucho/pages/food_page.dart';
 import 'package:tinder_ayacucho/pages/home_page.dart';
 import 'package:tinder_ayacucho/pages/login_page.dart';
 import 'package:tinder_ayacucho/pages/register_login_page.dart';
+import 'package:tinder_ayacucho/pages/ayacucho_page.dart';
 
 routes() => [
       GetPage(name: "/home", page: () => HomePage()),
@@ -12,4 +13,5 @@ routes() => [
           name: "/foodpage",
           page: () => FoodPage(),
           transition: Transition.zoom),
+      GetPage(name: "/ayacucho",page:()=>AyacuchoPage()),
     ];

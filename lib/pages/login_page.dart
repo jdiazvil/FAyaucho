@@ -7,7 +7,6 @@ import 'package:tinder_ayacucho/controllers/login_controller.dart';
 class LoginPage extends StatelessWidget {
   //const LoginPage({ Key? key }) : super(key: key);
   final controller = Get.put(LoginController());
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,6 +79,11 @@ class LoginPage extends StatelessWidget {
                             },
                           ),
                         ),
+                        Container( //Log with Facebook 01
+                          padding: const EdgeInsets.only(top: 16.0),
+                          alignment: Alignment.center,
+                          child: FacebookScreen(),
+                        ),
                       ],
                     ),
                   ),
@@ -89,4 +93,7 @@ class LoginPage extends StatelessWidget {
       ),
     );
   }
+
+
+
 }

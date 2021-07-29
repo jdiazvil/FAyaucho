@@ -1,7 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_signin_button/button_view.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+
+import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:flutter_signin_button/flutter_signin_button.dart';
+
 
 class LoginController extends GetxController {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -80,4 +87,73 @@ class LoginController extends GetxController {
           snackPosition: SnackPosition.BOTTOM);
     }
   }
+}
+
+class FacebookScreen extends StatefulWidget{
+  @override
+  _FacebookScreenState createState() => _FacebookScreenState();
+}
+
+class _FacebookScreenState extends State<FacebookScreen> {
+
+  bool _isFBLoggedIn = false;
+  Map _userObjFace = {};
+
+  GoogleSignIn _googleSignIn = GoogleSignIn(
+    scopes: ['email'],
+  );
+
+    @override
+    Widget build(BuildContext context) {
+      SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(
+          statusBarColor: Colors.white,
+          statusBarIconBrightness: Brightness.dark,
+        ),
+      );
+      return Container(
+        child: _isFBLoggedIn
+            ? Column(
+          children: [
+            CircleAvatar(
+              radius: 30.0,
+              backgroundImage: NetworkImage(_userObjFace["picture"]["data"]["url"]),
+              backgroundColor: Colors.transparent,
+            ),
+            Text(
+              _userObjFace["name"],
+            ),
+            TextButton(
+                onPressed: () {
+                  FacebookAuth.instance.logOut().then((value) {
+                    setState(() {
+                      _isFBLoggedIn = false;
+                      _userObjFace = {};
+                    });
+                  });
+                },
+                child: Text("Logout"))
+          ],
+        )
+          :Center(
+          child: SignInButton(
+            Buttons.FacebookNew,
+            text: "Login with Facebook",
+            onPressed: () async{
+              FacebookAuth.instance.login(
+                  permissions: ['public_profile','email']
+              ).then((value){
+                FacebookAuth.instance.getUserData().then((userData){
+                  setState((){
+                    _isFBLoggedIn = true;
+                    _userObjFace = userData;
+                  });
+                });
+              });
+            },
+          ),
+        ),
+      );
+
+    }
 }
