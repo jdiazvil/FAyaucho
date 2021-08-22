@@ -13,5 +13,5 @@ routes() => [
           name: "/foodpage",
           page: () => FoodPage(),
           transition: Transition.zoom),
-      GetPage(name: "/ayacucho",page:()=>AyacuchoPage()),
+      //GetPage(name: "/ayacucho",page:()=>AyacuchoPage()),
     ];

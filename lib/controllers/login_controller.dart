@@ -5,9 +5,9 @@ import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
+import 'package:tinder_ayacucho/pages/ayacucho_page.dart';
 
 
 class LoginController extends GetxController {
@@ -89,6 +89,13 @@ class LoginController extends GetxController {
   }
 }
 
+class DatosLogin {
+  final String img;
+  final String nomb;
+
+  DatosLogin(this.img, this.nomb);
+}
+
 class FacebookScreen extends StatefulWidget{
   @override
   _FacebookScreenState createState() => _FacebookScreenState();
@@ -111,19 +118,20 @@ class _FacebookScreenState extends State<FacebookScreen> {
           statusBarIconBrightness: Brightness.dark,
         ),
       );
+
       return Container(
-        child: _isFBLoggedIn
-            ? Column(
-          children: [
-            CircleAvatar(
-              radius: 30.0,
-              backgroundImage: NetworkImage(_userObjFace["picture"]["data"]["url"]),
-              backgroundColor: Colors.transparent,
-            ),
-            Text(
+        child: _isFBLoggedIn ?
+          Column(
+            children: [
+              CircleAvatar(
+                radius: 30.0,
+                backgroundImage: NetworkImage(_userObjFace["picture"]["data"]["url"]),
+                backgroundColor: Colors.transparent,
+              ),
+              Text(
               _userObjFace["name"],
-            ),
-            TextButton(
+              ),
+              TextButton(
                 onPressed: () {
                   FacebookAuth.instance.logOut().then((value) {
                     setState(() {
@@ -133,7 +141,7 @@ class _FacebookScreenState extends State<FacebookScreen> {
                   });
                 },
                 child: Text("Logout"))
-          ],
+            ],
         )
           :Center(
           child: SignInButton(
@@ -147,11 +155,18 @@ class _FacebookScreenState extends State<FacebookScreen> {
                   setState((){
                     _isFBLoggedIn = true;
                     _userObjFace = userData;
-                  });
+                    final data = DatosLogin(
+                      _userObjFace["picture"]["data"]["url"],
+                      _userObjFace["name"]);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => AyacuchoPage(data: data)),
+                    );
+                    });
                 });
               });
             },
-          ),
+        ),
         ),
       );
 
